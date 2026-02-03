@@ -1,0 +1,332 @@
+/* ...existing code... */
+:root{
+  --bg:#0f172a;
+  --card:#0b1220cc;
+  --glass: rgba(255,255,255,0.04);
+  --accent:#6EE7B7;
+  --muted:#98A2B3;
+  --glass-2: rgba(255,255,255,0.03);
+  --card-radius:14px;
+  --container:1100px;
+  color-scheme: dark;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: linear-gradient(180deg,#071024 0%, #071829 45%, #07101a 100%);
+  color:#e6eef8;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  line-height:1.5;
+}
+
+/* Make navbar fixed at top and avoid content being hidden under it */
+.site-nav{
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  z-index:1000;
+  /* semi-opaque background so content behind doesn't show through */
+  background: linear-gradient(180deg, rgba(11,18,32,0.94), rgba(11,18,32,0.88));
+  backdrop-filter: blur(8px);
+  box-shadow: 0 6px 20px rgba(2,6,23,0.45);
+  padding:12px 20px;
+}
+
+/* Keep the same centered layout from .container */
+.site-nav.container{ max-width:var(--container); margin:0 auto; }
+
+/* Prevent page content being hidden under the fixed nav */
+body{ padding-top:72px; }
+
+/* Ensure in-page anchors scroll below the fixed nav */
+.section, #top { scroll-margin-top:88px; }
+
+/* On small screens reduce the top padding to avoid large gaps */
+@media (max-width:900px){
+  body{ padding-top:64px; }
+  .section, #top { scroll-margin-top:72px; }
+}
+
+.container{
+  max-width:var(--container);
+  margin:0 auto;
+  padding:0 20px;
+}
+
+/* HERO */
+.hero{
+  position:relative;
+  padding:56px 0 42px;
+  overflow:hidden;
+}
+.hero-shape{
+  position:absolute;
+  right:-120px;
+  top:-40px;
+  width:520px;
+  height:520px;
+  /* reduced brightness: dark, subtle radial glow only (removed bright linear gradient) */
+  background: radial-gradient(circle at 30% 30%, rgba(6,30,36,0.18), transparent 40%);
+  filter: blur(48px) saturate(80%) contrast(0.9);
+  transform:rotate(18deg);
+  border-radius:50%;
+  pointer-events:none;
+  opacity:0.6;
+}
+.hero-content{
+  display:flex;
+  gap:32px;
+  align-items:flex-start;        /* align top so text starts aligned with image */
+  justify-content:space-between;
+}
+.hero-left{
+  display:flex;
+  gap:20px;
+  align-items:flex-start;
+  /* give the left column more horizontal room for name + subtitle */
+  flex:0 0 420px;
+  max-width:420px;
+}
+.avatar{
+  width:110px;height:110px;border-radius:18px;
+  display:flex;align-items:center;justify-content:center;
+  font-weight:800;font-family:"Montserrat",sans-serif;
+  font-size:28px;color:#06202a;
+  background:linear-gradient(135deg,#a7f3d0,#06b6d4);
+  box-shadow: 0 6px 30px rgba(6,182,212,0.12);
+}
+.intro{
+  flex:1 1 auto;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-start;
+}
+.intro h1{
+  margin:0;
+  font-family:"Montserrat",sans-serif;
+  font-size:32px;
+  line-height:1.04;
+  word-break:normal;
+  letter-spacing:-0.2px;
+}
+.subtitle{
+  margin:8px 0 14px;
+  color:var(--muted);
+  font-size:15px;
+  line-height:1.45;
+  max-width:100%;
+}
+.hero-blurb{
+  color:var(--muted);
+  max-width:100%;
+  margin:0 0 12px;
+}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;gap:10px;padding:10px 16px;border-radius:10px;font-weight:600;text-decoration:none}
+.btn-primary{background:linear-gradient(90deg,#06b6d4,#6ee7b7);color:#052023;box-shadow:0 8px 30px rgba(6,182,212,0.12)}
+.btn-outline{border:1px solid rgba(255,255,255,0.06);color:var(--accent);background:transparent}
+.btn:hover{transform:translateY(-3px);transition:all .22s}
+
+/* Socials */
+.socials{display:flex;gap:10px;margin-top:14px}
+.icon-link{display:inline-flex;align-items:center;justify-content:center;color:var(--muted);width:36px;height:36px;border-radius:8px;background:var(--glass-2);text-decoration:none}
+.icon-link:hover{color:var(--accent);transform:translateY(-2px)}
+
+/* ensure icon svg/img fit the icon container */
+.icon-link svg,
+.icon-link img {
+  width:18px;
+  height:18px;
+  display:block;
+}
+
+/* keep existing .icon-link styles (hover color uses currentColor) */
+.icon-link { color:var(--muted); display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:8px; background:var(--glass-2); text-decoration:none; }
+.icon-link:hover { color:var(--accent); transform:translateY(-2px); transition:transform .18s, color .18s; }
+
+/* LinkedIn brand styling for the inline SVG */
+.icon-link.linkedin { padding:4px; background:transparent; box-shadow:none; }
+.icon-link.linkedin svg { width:22px; height:22px; display:block; }
+.icon-link.linkedin svg .li-bg { fill:#0A66C2; }   /* LinkedIn blue */
+.icon-link.linkedin svg .li-glyph { fill:#ffffff; } /* white 'in' glyph */
+
+/* subtle hover for LinkedIn */
+.icon-link.linkedin:hover { transform:translateY(-2px) scale(1.02); transition:transform .18s, opacity .18s; opacity:0.96; }
+
+/* Sections */
+.section{padding:36px 0;border-radius:12px;margin-top:18px}
+.section h2{margin:0 0 16px;font-family:"Montserrat",sans-serif;color:#e6f6f0}
+.section p{color:var(--muted);margin:0 0 10px}
+
+/* Grid & Cards */
+.grid{display:grid;gap:18px;grid-template-columns:repeat(3,1fr)}
+.grid.two{grid-template-columns:repeat(2,1fr)}
+.card{
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border:1px solid rgba(255,255,255,0.03);
+  padding:20px;border-radius:var(--card-radius);
+  box-shadow: 0 6px 18px rgba(2,6,23,0.5);backdrop-filter: blur(6px);
+}
+.card.small{padding:16px}
+
+/* Skills list */
+.card h3{margin:0 0 8px}
+.card ul{margin:0;padding-left:18px;color:var(--muted)}
+
+/* Quick stats */
+.quick-stats{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-top:6px;
+}
+.quick-stats li{
+  list-style:none;
+  background:var(--glass);
+  padding:10px;
+  border-radius:10px;
+  color:var(--muted);
+  min-width:140px;              /* allow wrapping */
+  flex: 1 1 160px;              /* allow items to grow/shrink */
+  box-sizing:border-box;
+}
+.quick-stats li strong{display:block;color:#e6f6f0}
+.quick-stats li span{display:block;font-size:13px;color:var(--muted);margin-top:4px}
+
+/* Timeline */
+.timeline{display:flex;flex-direction:column;gap:18px}
+.timeline-item{
+  position:relative;padding:18px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.016), transparent);
+  border:1px solid rgba(255,255,255,0.03);
+}
+.timeline-item::before{
+  content:'';position:absolute;left:-10px;top:26px;width:10px;height:10px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px rgba(110,231,183,0.12)
+}
+.t-head{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.date{color:var(--muted);font-size:13px}
+.role{margin:8px 0 10px;color:#e6f6f0}
+
+/* Contact card & footer */
+.contact-card{background:var(--glass);padding:16px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);color:var(--muted)}
+.site-footer{padding:18px 0;margin-top:28px;border-top:1px solid rgba(255,255,255,0.02);color:var(--muted)}
+
+/* larger profile photo (replace small avatar) */
+.hero-photo{
+  width:120px;
+  height:170px;
+  border-radius:12px;
+  overflow:hidden;
+  flex:0 0 auto;
+  box-shadow: 0 12px 40px rgba(2,6,23,0.6);
+  background: linear-gradient(135deg,#0b1220 0%, rgba(255,255,255,0.02) 100%);
+}
+.hero-photo-img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+/* NAVBAR */
+.site-nav{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:12px 0;
+  position:relative;
+  z-index:12;
+}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:inherit}
+.nav-logo{width:44px;height:54px;object-fit:cover;border-radius:8px;box-shadow:0 6px 18px rgba(2,6,23,0.5)}
+.brand-name{font-weight:700;font-family:"Montserrat",sans-serif;font-size:14px;color:#e6f6f0}
+.nav-links{display:flex;gap:12px;list-style:none;margin:0;padding:0}
+.nav-links a{color:var(--muted);text-decoration:none;padding:8px 10px;border-radius:8px;font-weight:600}
+.nav-links a:hover{color:var(--accent);background:var(--glass)}
+.nav-toggle{display:none;background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted);padding:8px 10px;border-radius:8px}
+
+/* restore bullets in Professional Experience lists */
+.timeline-item ul {
+  list-style: disc;
+  padding-left: 20px;
+  margin: 8px 0 0;
+}
+.timeline-item ul li {
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+/* responsive nav */
+@media (max-width:900px){
+  .nav-toggle{display:inline-flex;align-items:center;justify-content:center}
+  .nav-links{display:none;position:absolute;top:68px;right:20px;flex-direction:column;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 12px 30px rgba(2,6,23,0.6)}
+  .nav-links.open{display:flex}
+}
+
+/* make layout adapt if image wider on small screens */
+@media (max-width:900px){
+  .hero-content{flex-direction:column;align-items:flex-start}
+  .hero-left{max-width:100%;flex:0 0 auto}
+  .hero-right{width:100%;min-width:0}
+  .quick-stats li{min-width:120px}
+}
+
+/* navbar was removed from markup — hide any remaining nav styles to avoid layout side-effects */
+.site-nav { display: none !important; }
+
+/* remove the extra top padding that was added for the fixed navbar */
+body { padding-top: 0; }
+
+/* restore normal anchor scroll behavior */
+.section, #top { scroll-margin-top: 0; }
+
+/* Contact icons and list */
+.contact-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.contact-item{display:flex;align-items:center;gap:12px}
+.contact-item a, .contact-item span{color:var(--muted);text-decoration:none;font-weight:600}
+.contact-item a:hover{color:var(--accent)}
+
+/* icon container */
+.contact-icon{width:36px;height:36px;border-radius:8px;background:var(--glass-2);display:inline-flex;align-items:center;justify-content:center;color:var(--muted);flex:0 0 36px}
+.contact-icon svg{width:18px;height:18px;display:block;}
+
+/* LinkedIn brand icon inside contact */
+.contact-icon.linkedin{background:transparent;padding:0;box-shadow:none;display:inline-flex;align-items:center;justify-content:center}
+.contact-icon.linkedin .contact-img,
+.contact-img { width:22px;height:22px;display:block;border-radius:4px;object-fit:cover }
+
+/* ensure contact layout remains compact on small screens */
+@media (max-width:600px){
+  .contact-list{gap:8px}
+  .contact-item{gap:10px}
+}
+
+/* small badge to highlight career focus */
+.focus-badge{
+  display:inline-block;
+  margin-top:10px;
+  padding:6px 10px;
+  border-radius:999px;
+  background:rgba(10,166,194,0.08);
+  color:var(--accent);
+  font-weight:700;
+  font-size:12px;
+  letter-spacing:0.2px;
+}
+
+/* Quote styling in hero section */
+.hero-quote{
+  margin-top:10px;
+  font-style:italic;
+  font-size:12px;                          /* smaller text */
+  color: rgba(152,162,179,0.65);           /* less bright / subdued */
+  max-width:340px;
+  line-height:1.3;
+  opacity:0.85;
+}
